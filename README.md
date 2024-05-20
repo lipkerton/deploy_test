@@ -1,26 +1,25 @@
-#  Как работать с репозиторием финального задания
+![example workflow]
+(https://github.com/lipkerton/kittygram_final/actions/workflows/main.yml/badge.svg)
 
-## Что нужно сделать
-
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
-
-## Как проверить работу с помощью автотестов
-
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
-```
-
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
-
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
-
-## Чек-лист для проверки перед отправкой задания
-
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+# Для чего нужен проект #
+Китиграм берет фотку вашего кота и выставляет ее, как на выставку, вы можете загрузить даже сразу несколько котов, написать их имена, обозначить цвет и выбрать все нужные характеристики для вашей публикации.
+# Технологии #
+Docker, Django, Python, Nginx
+# Как развернуть проект #
+Проект может быть развернут на локальном хосте и на удаленном сервере через контейнеры. Чтобы развернуть его на локальном хосте нужно запустить демон Docker и выполнить команды:
++ Запустить docker compose, чтобы взять контейнеры с открытого репозитория на докере:
+  docker compose -f docker-compose.production.yml up
++ Собрать статику:
+  docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
+  docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
++ Применить миграции:
+  docker compose -f docker-compose.production.yml exec backend python manage.py migrate
+Чтобы развернуть на удаленном сервере:
++ sudo docker compose -f docker-compose.production.yml up -d
++ sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
++ sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
++ sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/ 
+# Как заполнить env #
+Перейти в .env файл и задать свои значения переменным
+# Автор #
+Петр Петухов
