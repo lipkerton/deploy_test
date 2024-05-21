@@ -20,6 +20,14 @@ Docker, Django, Python, Nginx
 + sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
 + sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/ 
 # Как заполнить env #
-Перейти в .env файл и задать свои значения переменным
+Перейти в .env файл и задать свои значения переменным:
+Пример:
+POSTGRES_USER=имя пользователя БД
+POSTGRES_PASSWORD=пароль пользователя БД
+POSTGRES_DB=название базы данных
+DB_HOST=название базы данных хоста
+DB_PORT=порт для базы данных
+DEBUG=значение дебага
+ALLOWED_HOSTS=допустимые хосты
 # Автор #
 Петр Петухов

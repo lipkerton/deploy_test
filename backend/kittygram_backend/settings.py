@@ -10,8 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
 SECRET_KEY = get_random_secret_key()
-DEBUG = False
-ALLOWED_HOSTS = ['158.160.82.178', '127.0.0.1', 'localhost', 'mykittygram.myddns.me']
+DEBUG = os.getenv('DEBUG')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split()
 
 INSTALLED_APPS = [
     'django.contrib.admin',
