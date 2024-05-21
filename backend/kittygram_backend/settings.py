@@ -2,14 +2,16 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+from django.core.management.utils import get_random_secret_key
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = os.getenv('DEBUG')
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split()
+SECRET_KEY = get_random_secret_key()
+DEBUG = False
+ALLOWED_HOSTS = ['158.160.82.178', '127.0.0.1', 'localhost', 'mykittygram.myddns.me']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
